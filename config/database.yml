@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: gitlab_support_toolkit_development
+
+test:
+  <<: *default
+  database: gitlab_support_toolkit_test
+
+production:
+  <<: *default
+  database: gitlab_support_toolkit_production
+  username: gitlab_support_toolkit
+  password: <%= ENV["GITLAB_SUPPORT_TOOLKIT_DATABASE_PASSWORD"] %>
