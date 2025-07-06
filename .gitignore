@@ -41,3 +41,4 @@ yarn-debug.log*
 # Ignore Mac system files
 .DS_Store.history/
 .DS_Store
+.history/
