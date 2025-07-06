@@ -14,8 +14,8 @@ Phase 2:
   - [x] `rails g controller LogAnalyses`
   - [x] `rails g controller ApiTests`
 Phase 3:
-- [ ] Implement core features:
-  - [ ] File upload with Active Storage
-  - [ ] Log parsing service
-  - [ ] GitLab API integration
-  - [ ] Basic UI with Bootstrap
+- [x] Implement core features:
+  - [x] File upload with Active Storage
+  - [x] Log parsing service
+  - [x] GitLab API integration
+  - [x] Basic UI with Bootstrap
