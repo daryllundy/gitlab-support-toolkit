@@ -16,6 +16,16 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "sassc-rails"
 gem "image_processing", "~> 1.2"
 
+# Authentication
+gem "devise"
+
+# UI Framework
+gem "bootstrap", "~> 5.2"
+gem "jquery-rails"
+
+# Background Jobs
+gem "sidekiq"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails"

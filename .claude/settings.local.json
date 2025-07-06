@@ -7,7 +7,10 @@
       "Bash(bundle exec rails:*)",
       "Bash(touch:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(bundle exec rake:*)",
+      "Bash(createdb:*)",
+      "Bash(brew services start:*)"
     ],
     "deny": []
   }

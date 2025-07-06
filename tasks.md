@@ -1,9 +1,9 @@
 Phase 1:
 - [x] Generate Rails app: `rails new . --database=postgresql --skip-test`
-- [ ] Setup basic structure
-- [ ] Push initial Rails commit
-- [ ] Setup database: `rails db:create db:migrate`
-- [ ] Add gems: Devise, Bootstrap, Sidekiq
+- [x] Setup basic structure
+- [x] Push initial Rails commit
+- [x] Setup database: `rails db:create db:migrate`
+- [x] Add gems: Devise, Bootstrap, Sidekiq
 Phase 2:
 - [ ] Generate models:
   - [ ] `rails g model LogFile`
