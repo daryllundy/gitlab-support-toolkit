@@ -1,0 +1,98 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">GitLab Support Toolkit Dashboard</h1>
+      
+      <!-- Stats Cards -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Total Log Files</h5>
+              <h2 class="text-primary"><%= @stats[:total_log_files] %></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Total Analyses</h5>
+              <h2 class="text-success"><%= @stats[:total_analyses] %></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Pending Analyses</h5>
+              <h2 class="text-warning"><%= @stats[:pending_analyses] %></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Critical Errors</h5>
+              <h2 class="text-danger"><%= @stats[:critical_errors] %></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent Activity -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h5>Recent Log Files</h5>
+            </div>
+            <div class="card-body">
+              <% if @recent_log_files.any? %>
+                <% @recent_log_files.each do |log_file| %>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                      <strong><%= log_file.name %></strong>
+                      <small class="text-muted d-block"><%= log_file.created_at.strftime("%B %d, %Y at %I:%M %p") %></small>
+                    </div>
+                    <span class="badge bg-<%= log_file.status == 'completed' ? 'success' : 'warning' %>">
+                      <%= log_file.status.humanize %>
+                    </span>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted">No log files uploaded yet.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h5>Recent Analyses</h5>
+            </div>
+            <div class="card-body">
+              <% if @recent_analyses.any? %>
+                <% @recent_analyses.each do |analysis| %>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                      <strong><%= analysis.analysis_type.humanize %></strong>
+                      <small class="text-muted d-block">
+                        <%= analysis.log_file.name %> - <%= analysis.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                      </small>
+                    </div>
+                    <span class="badge bg-<%= analysis.status == 'completed' ? 'success' : 'warning' %>">
+                      <%= analysis.status.humanize %>
+                    </span>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted">No analyses completed yet.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,14 +5,14 @@ Phase 1:
 - [x] Setup database: `rails db:create db:migrate`
 - [x] Add gems: Devise, Bootstrap, Sidekiq
 Phase 2:
-- [ ] Generate models:
-  - [ ] `rails g model LogFile`
-  - [ ] `rails g model Analysis`
-  - [ ] `rails g model ErrorPattern`
-- [ ] Create controllers:
-  - [ ] `rails g controller Dashboard`
-  - [ ] `rails g controller LogAnalyses`
-  - [ ] `rails g controller ApiTests`
+- [x] Generate models:
+  - [x] `rails g model LogFile`
+  - [x] `rails g model Analysis`
+  - [x] `rails g model ErrorPattern`
+- [x] Create controllers:
+  - [x] `rails g controller Dashboard`
+  - [x] `rails g controller LogAnalyses`
+  - [x] `rails g controller ApiTests`
 Phase 3:
 - [ ] Implement core features:
   - [ ] File upload with Active Storage

@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Log Analysis</h1>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h5>Log Files</h5>
+            </div>
+            <div class="card-body">
+              <% if @log_files.any? %>
+                <% @log_files.each do |log_file| %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                          <h6 class="card-title"><%= log_file.name %></h6>
+                          <p class="card-text">
+                            <small class="text-muted">
+                              Size: <%= number_to_human_size(log_file.file_size) %> | 
+                              Uploaded: <%= log_file.created_at.strftime("%B %d, %Y") %>
+                            </small>
+                          </p>
+                          <p class="card-text">
+                            <span class="badge bg-<%= log_file.status == 'completed' ? 'success' : 'warning' %>">
+                              <%= log_file.status.humanize %>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Actions
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <%= form_with model: [log_file, Analysis.new], local: true, class: "d-inline" do |f| %>
+                                <%= f.hidden_field :analysis_type, value: "error_detection" %>
+                                <%= f.submit "Error Detection", class: "dropdown-item" %>
+                              <% end %>
+                            </li>
+                            <li>
+                              <%= form_with model: [log_file, Analysis.new], local: true, class: "d-inline" do |f| %>
+                                <%= f.hidden_field :analysis_type, value: "performance_analysis" %>
+                                <%= f.submit "Performance Analysis", class: "dropdown-item" %>
+                              <% end %>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted">No log files available for analysis.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h5>Recent Analyses</h5>
+            </div>
+            <div class="card-body">
+              <% if @analyses.any? %>
+                <% @analyses.each do |analysis| %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                          <h6 class="card-title"><%= analysis.analysis_type.humanize %></h6>
+                          <p class="card-text">
+                            <small class="text-muted">
+                              File: <%= analysis.log_file.name %><br>
+                              Started: <%= analysis.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                            </small>
+                          </p>
+                          <p class="card-text">
+                            <span class="badge bg-<%= analysis.status == 'completed' ? 'success' : 'warning' %>">
+                              <%= analysis.status.humanize %>
+                            </span>
+                            <% if analysis.completed? %>
+                              <span class="badge bg-info">
+                                <%= analysis.errors_found %> errors found
+                              </span>
+                            <% end %>
+                          </p>
+                        </div>
+                        <div>
+                          <% if analysis.completed? %>
+                            <%= link_to "View Results", log_analysis_path(analysis), class: "btn btn-sm btn-primary" %>
+                          <% end %>
+                          <%= link_to "Delete", log_analysis_path(analysis), method: :delete, 
+                                      confirm: "Are you sure?", class: "btn btn-sm btn-outline-danger" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted">No analyses have been run yet.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
